@@ -1,48 +1,58 @@
 'use client';
-
 import { useState } from 'react';
-import ChatInterface from '../components/ChatInterface';
-import Header from '../components/Header';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
 
 export default function Home() {
-  const [messages, setMessages] = useState([{
-    id: '1',
-    content: 'Hello! I\'m DeepAgent, your AI-powered assistant. How can I help you today?',
-    sender: 'ai',
-    timestamp: new Date()
-  }]);
-
-  const handleSendMessage = (content: string) => {
-    const userMessage = {
-      id: Date.now().toString(),
-      content,
-      sender: 'user' as const,
-      timestamp: new Date()
-    };
-    
-    setMessages(prev => [...prev, userMessage]);
-    
-    // Simulate AI response
-    setTimeout(() => {
-      const aiMessage = {
-        id: (Date.now() + 1).toString(),
-        content: `Thank you for your message: "${content}". This is a simulated response from DeepAgent. In a full implementation, this would connect to a real AI service.`,
-        sender: 'ai' as const,
-        timestamp: new Date()
-      };
-      setMessages(prev => [...prev, aiMessage]);
-    }, 1000);
-  };
-
   return (
-    <div className="flex flex-col h-screen">
-      <Header />
-      <main className="flex-1 flex flex-col overflow-hidden">
-        <ChatInterface 
-          messages={messages} 
-          onSendMessage={handleSendMessage} 
-        />
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-black">
+      {/* Header Section */}
+      <header className="bg-gradient-to-r from-blue-800 to-purple-800 py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-5xl font-bold text-white mb-6">TheBytePlay</h1>
+          <p className="text-xl text-gray-300 mb-8">
+            Your ultimate gaming community hub. Connect, compete, and conquer with fellow gamers.
+          </p>
+          <div className="flex justify-center space-x-4">
+            <button className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+              Join Community
+            </button>
+            <button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+              Browse Games
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1">
+        {/* Gaming Features Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-white text-center mb-12">Gaming Features</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-gray-800 p-6 rounded-lg">
+                <h3 className="text-2xl font-bold text-yellow-400 mb-4">Community Chat</h3>
+                <p className="text-gray-300">Connect with fellow gamers in real-time chat rooms and forums.</p>
+              </div>
+              <div className="bg-gray-800 p-6 rounded-lg">
+                <h3 className="text-2xl font-bold text-green-400 mb-4">Tournaments</h3>
+                <p className="text-gray-300">Join competitive tournaments and climb the leaderboards.</p>
+              </div>
+              <div className="bg-gray-800 p-6 rounded-lg">
+                <h3 className="text-2xl font-bold text-blue-400 mb-4">Game Reviews</h3>
+                <p className="text-gray-300">Read and write reviews for the latest games in the community.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <Contact />
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
